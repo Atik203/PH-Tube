@@ -1,68 +1,43 @@
+const tabContainer = document.getElementById("tab-container");
+const cardContainer = document.getElementById("card-container");
+
 const loadData = async () => {
   const res = await fetch(
     "https://openapi.programming-hero.com/api/videos/categories"
   );
   const data = await res.json();
-  const tabContainer = document.getElementById("tab-container");
   tabContainer.innerHTML = "";
   data.data.forEach((category) => {
     const div = document.createElement("div");
     div.innerHTML = `
-    <a onclick="handleCategoryId(${category.category_id})" class="tab btn bg-[#25252533] text-black hover:bg-[#FF1F3D] hover:text-white">${category.category}</a>
-    `;
+          <a onclick="handleCategoryId(${category.category_id})" class="tab btn bg-[#25252533] text-black hover:bg-[#FF1F3D] hover:text-white">${category.category}</a>
+        `;
     tabContainer.appendChild(div);
   });
+  handleCategoryId("1000");
 };
 
 function sortDataByViews(data) {
-  // Sort the data by views (assuming views are formatted consistently)
+  // Sort the data by views
   data.sort((a, b) => {
     const viewsA = parseFloat(a.others?.views);
     const viewsB = parseFloat(b.others?.views);
-    console.log(viewsA, viewsB);
     return viewsB - viewsA;
   });
   return data;
 }
-// convert time
 function convertTime(seconds) {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   return `${hours}hrs ${minutes}min ago`;
 }
-let sortClicked = false;
-const sortByViewButton = document.getElementById("sort-by-view-button");
-sortByViewButton.addEventListener("click", () => {
-  // Fetch data based on the selected category ID
-  sortClicked = true;
-});
-const handleCategoryId = async (categoryId) => {
-  const res = await fetch(
-    `https://openapi.programming-hero.com/api/videos/category/${categoryId}`
-  );
-  const data = await res.json();
-  const cardContainer = document.getElementById("card-container");
+function renderData(data) {
   cardContainer.innerHTML = "";
-  if (sortClicked) {
-    sortDataByViews(data.data);
-    sortClicked = false;
-  }
-
-  // no content section
-  if (data.data.length == 0) {
-    const content = document.getElementById("no-content");
-    content.classList.remove("hidden");
-  } else {
-    const content = document.getElementById("no-content");
-    content.classList.add("hidden");
-  }
-
-  // card section
-  data.data?.forEach((details) => {
+  data.forEach((details) => {
+    // Render each card
     const div = document.createElement("div");
     const postedDate = details.others.posted_date;
     const Time = convertTime(postedDate);
-
     div.innerHTML = `
      
      <div class="card card-compact bg-base-100 shadow-lg relative mt-2">
@@ -130,10 +105,38 @@ const handleCategoryId = async (categoryId) => {
           </div>
         </div>
      `;
-
     cardContainer.appendChild(div);
   });
+}
+
+// Function to sort data by views
+function sortDataByViewsAndRender(data) {
+  const sortedData = sortDataByViews(data);
+  renderData(sortedData);
+}
+
+const handleCategoryId = async (categoryId) => {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/videos/category/${categoryId}`
+  );
+  const data = await res.json();
+
+  // Render all data by default
+  renderData(data.data);
+
+  // event listener to sort button
+  const sortByViewButton = document.getElementById("sort-by-view-button");
+  sortByViewButton.addEventListener("click", () => {
+    sortDataByViewsAndRender(data.data);
+  });
+
+  //  no content section
+  const content = document.getElementById("no-content");
+  if (data.data.length === 0) {
+    content.classList.remove("hidden");
+  } else {
+    content.classList.add("hidden");
+  }
 };
 
 loadData();
-handleCategoryId("1000");
