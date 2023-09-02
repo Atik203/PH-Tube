@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="style.css" />
     <title>Blog</title>
   </head>
-  <body>
-    <header class="w-11/12 mx-auto">
+  <body class="bg-gray-100">
+    <header class="w-11/12 mx-auto mt-5">
       <div
         class="navbar my-4 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0"
       >
@@ -38,6 +38,238 @@
       <hr class="h-[2px] bg-[#cbcbcb]" />
     </header>
     <!-- main section -->
-    <main></main>
+
+    <main class="container mx-auto mt-8 w-11/12 text-justify">
+      <!-- article 1 -->
+      <article class="bg-white p-8 rounded-lg shadow-md">
+        <h2 class="text-2xl font-semibold mb-4">
+          1. Scope of var, let, and const:
+        </h2>
+        <p class="text-lg leading-relaxed mt-4">
+          In JavaScript, variables declared with
+          <code class="bg-gray-200 p-1 rounded">var</code> have function scope,
+          which means they are accessible throughout the entire function where
+          they are defined. On the other hand, variables declared with
+          <code class="bg-gray-200 p-1 rounded">let</code> and
+          <code class="bg-gray-200 p-1 rounded">const</code> have block scope,
+          limiting their accessibility to the block of code where they are
+          declared.
+        </p>
+        <!-- var -->
+        <h3 class="text-xl font-semibold mt-6 mb-2">Var:</h3>
+        <div class="flex flex-col lg:flex-row justify-between items-center">
+          <div class="w-[300px] md:w-[650px] md:h-[310px]">
+            <pre
+              class="bg-gray-200 text-black rounded p-4 mx-auto w-full h-full"
+            >
+    <code>
+function varScope() {
+  if (true) {
+    var x = 10;
+  }
+
+  console.log(x); // 10
+}
+varScope();
+console.log(x); // undefined
+    </code>
+</pre>
+          </div>
+          <div class="w-[300px] md:w-[600px]">
+            <img
+              src="https://miro.medium.com/v2/resize:fit:1400/1*tfFULzUzpqS8eboc9cS84w.png"
+              alt="Blog Image"
+              class="mx-auto rounded-lg mb-6 mt-6"
+            />
+          </div>
+        </div>
+        <!-- let -->
+        <h3 class="text-xl font-semibold mt-6 mb-2">let:</h3>
+        <div class="flex flex-col lg:flex-row justify-between items-center">
+          <div class="w-[300px] md:w-[650px] md:h-[350px]">
+            <pre
+              class="bg-gray-200 text-black rounded p-4 mx-auto w-full h-full"
+            >
+    <code>
+function letUsage() {
+  let A = "Hello, ";
+  if (true) {
+  let A = "World!";  
+  console.log("Inside:", A); 
+  // World!   
+  }
+  console.log("Outside:", A); 
+  // Hello, 
+}
+letUsage();
+    </code>
+</pre>
+          </div>
+          <div class="w-[300px] md:w-[600px]">
+            <img
+              src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*yj0O5G2RRrYK_d9qkEqQQg.png"
+              alt="Blog Image"
+              class="mx-auto rounded-lg mb-6 mt-6"
+            />
+          </div>
+        </div>
+        <!-- const -->
+        <h3 class="text-xl font-semibold mt-6 mb-2">const:</h3>
+        <div class="flex flex-col lg:flex-row justify-between items-center">
+          <div class="w-[300px] md:w-[650px] md:h-[290px]">
+            <pre
+              class="bg-gray-200 text-black rounded text-sm md:text-base p-4 mx-auto w-full h-full"
+            >
+    <code>
+function ConstUsage() {
+  const pi = 3.1416;
+  console.log(pi);
+  // Attempting to reassign const
+  //It will result in an error.
+  // pi = 3.14; TypeError
+  // we can not assign new value
+}
+ConstUsage();
+    </code>
+</pre>
+          </div>
+          <div class="w-[300px] md:w-[600px]">
+            <img
+              src="https://miro.medium.com/v2/resize:fit:615/1*FCuCZkwKp7SgG-IUMstvIQ.png"
+              alt="Blog Image"
+              class="mx-auto rounded-lg mb-6 mt-6"
+            />
+          </div>
+        </div>
+      </article>
+
+      <!-- article 2 -->
+      <article class="bg-white p-8 rounded-lg shadow-md mt-8">
+        <h2 class="text-2xl font-semibold mb-4">
+          1. Use cases of null and undefined:
+        </h2>
+        <p class="text-lg leading-relaxed mt-4">
+          <code class="bg-gray-200 p-1 rounded">null</code> is used to
+          intentionally represent the absence of a value or to clear a variable
+          or property. <br />
+          <br />
+          <code class="bg-gray-200 p-1 rounded">undefined</code> typically means
+          a variable exists but has not been given a value, or a function
+          doesn't return anything.
+        </p>
+        <div class="container mx-auto p-6 mt-2">
+          <h1 class="text-2xl font-semibold mb-4">Undefined vs Null</h1>
+          <div class="overflow-x-auto">
+            <table class="w-full table-auto">
+              <thead>
+                <tr>
+                  <th class="border-2 px-4 py-2">Area</th>
+                  <th class="border-2 px-4 py-2">Undefined</th>
+                  <th class="border-2 px-4 py-2">Null</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="border-2 px-4 py-2">Definition</td>
+                  <td class="border-2 px-4 py-2">
+                    Undefined means the variable has been declared, but its
+                    value has not been assigned.
+                  </td>
+                  <td class="border-2 px-4 py-2">
+                    Null means an empty value or a blank value.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border-2 px-4 py-2">The typeof operator</td>
+                  <td class="border-2 px-4 py-2">
+                    The typeof() operator returns undefined for an undefined
+                    variable.
+                  </td>
+                  <td class="border-2 px-4 py-2">
+                    The typeof() operator returns the type as an object for a
+                    variable whose value is assigned as null.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border-2 px-4 py-2">
+                    On performing arithmetic operations
+                  </td>
+                  <td class="border-2 px-4 py-2">
+                    It returns <span class="font-semibold">NaN</span> on
+                    performing arithmetic operations.
+                  </td>
+                  <td class="border-2 px-4 py-2">
+                    Converts to 0 then performs the operation.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border-2 px-4 py-2">Is it an assignment value?</td>
+                  <td class="border-2 px-4 py-2">
+                    No, as there is no value assigned to the variable, it
+                    becomes undefined.
+                  </td>
+                  <td class="border-2 px-4 py-2">
+                    Yes, as we assign null to a variable, it is an assignment
+                    value.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+
+      <!-- article 3 -->
+      <article class="bg-white p-8 rounded-lg shadow-md mt-8">
+        <h2 class="text-2xl font-semibold mb-4">3. What is a REST API?</h2>
+        <p class="text-lg leading-relaxed mt-4">
+          REST API stands for Representational State Transfer Application
+          Programming Interface. It is an architectural style for designing
+          networked applications. REST is not a specific technology or protocol,
+          but rather a set of constraints and principles for building web
+          services that are scalable, stateless, and can be easily consumed by
+          clients
+        </p>
+        <h2 class="text-xl font-semibold mt-6 mb-4">
+          Key Principles of REST API
+        </h2>
+        <ol class="space-y-2 text-justify text-lg">
+          <li>
+            <strong>Stateless:</strong> Each request from a client to a server
+            must contain all the information needed to understand and process
+            the request.
+          </li>
+          <li>
+            <strong>Client-Server Architecture:</strong> REST separates the
+            client and server, allowing them to evolve independently.
+          </li>
+          <li>
+            <strong>Uniform Interface:</strong> It uses standard HTTP methods
+            for interaction.
+          </li>
+          <li>
+            <strong>Resource-Based:</strong> Resources are identified by URLs
+            and manipulated using HTTP methods.
+          </li>
+          <li>
+            <strong>Representation:</strong> Resources can have multiple
+            representations like JSON or XML.
+          </li>
+          <li>
+            <strong>Statelessness:</strong> The server does not store client
+            state between requests.
+          </li>
+          <li>
+            <strong>Layered System:</strong> It can be composed of multiple
+            layers to improve performance and security.
+          </li>
+        </ol>
+      </article>
+    </main>
+    <footer class="bg-gray-600 text-white py-4 mt-16">
+      <div class="container mx-auto text-center">
+        <p>&copy; 2023 PH Tube</p>
+      </div>
+    </footer>
   </body>
 </html>
